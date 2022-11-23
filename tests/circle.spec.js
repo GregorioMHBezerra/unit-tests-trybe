@@ -25,35 +25,36 @@ describe('4 - Implemente os casos de teste para a função `circle`', () => {
   it('Verifica se ao receber um raio, a função `circle` retorna um objeto contendo os valores esperados', () => {
     // Teste se circle retorna undefined, caso o parâmetro passado não seja um número.
     expect(circle('a')).toBeUndefined();
-
+  });
+  it('verifica se a função retorna um objeto', () => {
     // Teste se circle retorna um objeto.
     const type = typeof(circle(2));
     expect(typeof(circle(2))).toMatch(type);
-
+  });
+  it('verifica se a função retorna um objeto com 3 propriedades', () => {
     // Teste se o objeto retornado possui 3 propriedades.
     expect(Object.keys(circle(2))).toHaveLength(3);
-
+  });
+  it('verifica se a função retorna undefined ao não receber parâmetros', () => {
     // Teste se a função, quando não recebe nenhum parâmetro, retorna undefined.
     expect(circle()).toBeUndefined();
-
+  })
+  it("Verifica se retorna um 'key' com 'value' igual a circunferência correta para um círculo de raio 2", () => {
     // Teste se dentro do objeto retornado, a função retorna uma `key` com `value` igual à circunferência correta para um círculo de raio 2.
     expect(circle(2)).toHaveProperty('circumference', (2*3.14*2));
-    });
+  });
+  it("Verifica se retorna um 'key' com 'value' igual a área correta para um círculo de raio 3", () => {
     // Teste se dentro do objeto retornado, a função retorna uma `key` com `value` igual à área correta para um círculo de raio 3.
-    it('teste2', () => {
       const {area} = circle(3);
       const precise = parseFloat(area.toPrecision(4));
       console.log(precise);
 
       expect((precise)).toEqual(3*3*3.14);
-    });
+  });
     
 
+  it('Verifica se circle(3) retorn raio 3, area 28.259999999999998 e circunferência 18.84', () => {
     // Teste se a função retorna, em um objeto, os dados corretos de um círculo de raio 3.
-    it('teste', () => {
     expect(circle(3)).toMatchObject({radius: 3, area: 28.259999999999998, circumference: 18.84})
-    });
-    // ESCREVA SEUS TESTES ABAIXO:
-
-  
+  });
 });
