@@ -68,13 +68,13 @@ describe('9 - Implemente os casos de teste da função `getCharacter`', () => {
   });
   
   
-  it('', () => {
+  it('Verifica se retorna undefind caso não passe parâmetros', () => {
     // 1. Teste se a função, quando não recebe nenhum parâmetro, retorna undefined.
     expect(getCharacter()).toBeUndefined();
   });
   
 
-  it('', () => {
+  it('Verifica se os parâmetros não são case sensitive', () => {
     // 5. Teste se o parâmetro não é Case Sensitive, ou seja, independente de conter letras maiúsculas ou minúsculas retorna o mesmo objeto relativo a ele.
     expect(getCharacter('arya')).toMatchObject({
       name: 'Arya Stark',
@@ -94,7 +94,7 @@ describe('9 - Implemente os casos de teste da função `getCharacter`', () => {
   });
   
 
-  it('', () => {
+  it('Verifica se o retorno é undefined caso o parâmetro passado não conste no banco de dados', () => {
     // 6. Teste se ao passar um nome que não está na tabela, a função retorna undefined.
     expect(getCharacter('não consta')).toBeUndefined();
   });
