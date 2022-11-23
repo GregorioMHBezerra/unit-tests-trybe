@@ -47,7 +47,8 @@ describe('6 - Implemente os casos de teste para a função `productDetails`', ()
   });
   it('Verifica se os itens do array são objetos', () => {
     // Teste se os dois itens dentro do array retornado pela função são objetos.
-    expect(typeof(resultFunction[0]) && typeof(resultFunction[1])).toEqual('object');
+    expect(typeof(resultFunction[1])).toBe('object');
+    expect(typeof(resultFunction[0])).toBe('object');
   });
   it('Verifica se quando passado parâmetros diferentes, os dois objetos também são diferentes', () => {
     // Teste se quando passado parâmetros diferentes entre si, os dois objetos também são diferentes entre si.
@@ -59,6 +60,7 @@ describe('6 - Implemente os casos de teste para a função `productDetails`', ()
     const productId2 = resultFunction[1].details.productId;
     const finalId = productId.slice(productId.length - 3);
     const finalId2 = productId2.slice(productId2.length - 3);
-    expect(finalId && finalId2).toEqual('123');
+    const totalId = `${finalId}${finalId2}`
+    expect(totalId).toBe('123123');
   });
 });

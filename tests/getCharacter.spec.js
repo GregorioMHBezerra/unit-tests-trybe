@@ -43,14 +43,59 @@ Retorno:
 */
 
 describe('9 - Implemente os casos de teste da função `getCharacter`', () => {
+  const objArya = getCharacter('Arya');
+  const objBrienne = getCharacter('Brienne');
+  const objMelissandre = getCharacter('Melissandre');
   it('Verifica se a função `getCharacter` retorna o objeto do personagem corretamente.', () => {
-    fail('Teste vazio!');
-    // ESCREVA SEUS TESTES ABAIXO:
-    // 1. Teste se a função, quando não recebe nenhum parâmetro, retorna undefined.
     // 2. Teste se a função retorna o objeto correto para o parâmetro 'Arya',
+    expect(objArya).toMatchObject({
+      name: 'Arya Stark',
+      class: 'Rogue',
+      phrases: ['Not today', 'A girl has no name.'],
+    });
     // 3. Teste se a função retorna o objeto correto para o parâmetro 'Brienne',
+    expect(objBrienne).toMatchObject({
+      name: 'Brienne Tarth',
+      class: 'Knight',
+      phrases: ['Im No Lady, Your Grace.', 'I, Brienne Of Tarth, Sentence You To Die.'],
+    });
     // 4. Teste se a função retorna o objeto correto para o parâmetro 'Melissandre',
+    expect(objMelissandre).toMatchObject({
+      name: 'Melissandre',
+      class: 'Necromancer',
+      phrases: ['Death By Fire Is The Purest Death.', 'For The Night Is Dark And Full Of Terrors.'],
+    })
+  });
+  
+  
+  it('', () => {
+    // 1. Teste se a função, quando não recebe nenhum parâmetro, retorna undefined.
+    expect(getCharacter()).toBeUndefined();
+  });
+  
+
+  it('', () => {
     // 5. Teste se o parâmetro não é Case Sensitive, ou seja, independente de conter letras maiúsculas ou minúsculas retorna o mesmo objeto relativo a ele.
+    expect(getCharacter('arya')).toMatchObject({
+      name: 'Arya Stark',
+      class: 'Rogue',
+      phrases: ['Not today', 'A girl has no name.'],
+    });
+    expect(getCharacter('briEnNe')).toMatchObject({
+      name: 'Brienne Tarth',
+      class: 'Knight',
+      phrases: ['Im No Lady, Your Grace.', 'I, Brienne Of Tarth, Sentence You To Die.'],
+    });
+    expect(getCharacter('meliSSandRe')).toMatchObject({
+      name: 'Melissandre',
+      class: 'Necromancer',
+      phrases: ['Death By Fire Is The Purest Death.', 'For The Night Is Dark And Full Of Terrors.'],
+    })
+  });
+  
+
+  it('', () => {
     // 6. Teste se ao passar um nome que não está na tabela, a função retorna undefined.
+    expect(getCharacter('não consta')).toBeUndefined();
   });
 });
