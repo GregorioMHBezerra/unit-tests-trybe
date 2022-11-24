@@ -28,43 +28,94 @@ const createMenu = require('../src/restaurant');
     meuRestaurante.order('coxinha') // Retorno: undefined
 
     meuRestaurante.consumption // Retorno: ['coxinha']
-
-    meuRestaurante.pay() // Retorno: 4.29
-
-  IMPORTANTE: FAÇA OS TESTES E IMPLEMENTAÇÕES DE ACORDO COM A SEQUÊNCIA INDICADA NO README DO PROJETO!
-*/
-
-describe('10 - Implemente a função `createMenu`, bem como seus casos de teste', () => {
-  it('Verifica se a função `createMenu` tem o comportamento esperado', () => {
-    fail('Teste vazio!');
-    // 1: Verifique se função `createMenu()` retorna um objeto que possui a chave `fetchMenu`, a qual tem como valor uma função.
-
-    // 2: Verifique se 'objetoRetornado.fetchMenu()' retorna um objeto cujas chaves são somente `food` e `drink`, 
-    // considerando que a função createMenu() foi chamada com o objeto: `{ food: {}, drink: {} }`.
-
-    // 3: Verifique se o menu passado pra função createMenu() é idêntico ao menu recuperado pela função 'objetoRetornado.fetchMenu()'.
-
-    // 4: Faça a implementação do item 4 do README no arquivo src/restaurant.js.
-
-    // 5: Verifique se 'objetoRetornado.consumption', após a criação do menu, retorna um array vazio.
-
-    // 6: Faça a implementação do item 6 do README no arquivo src/restaurant.js.
     
+    meuRestaurante.pay() // Retorno: 4.29
+    
+    IMPORTANTE: FAÇA OS TESTES E IMPLEMENTAÇÕES DE ACORDO COM A SEQUÊNCIA INDICADA NO README DO PROJETO!
+    */
+describe('10 - Implemente a função `createMenu`, bem como seus casos de teste', () => {
+  // it('Verifica se a função `createMenu` tem o comportamento esperado', () => {
+    //   fail('Teste vazio!');
+    // });
+  
+  it("Verifica se a função 'createMenu()' retorna um objeto com chave 'fetchMenu' e valor de function", () => {
+
+    const objetoRetornadoVazio = createMenu();
+    expect(objetoRetornadoVazio).toHaveProperty('fetchMenu');
+  });
+  
+  it("Verificar se 'objetoRetornado.fetchMenu()' retorna um objeto com chaves 'food' e 'drink'. Considerando que a função createMenu() foi chamada com o objeto: { food: {}, drink: {} } ", () => {
+    
+    const objetoRetornado = createMenu({food: {}, drink: {}});
+    expect(Object.keys(objetoRetornado.fetchMenu())).toHaveLength(2);
+    expect(Object.keys(objetoRetornado.fetchMenu())).toContain('food');
+    expect(Object.keys(objetoRetornado.fetchMenu())).toContain('drink');
+  });
+  
+  it("Verificar se o menu passado para a função 'createMenu()' é idêntico ao menu recuperado pela função 'objetoRetornado.fetchMenu()' ", () => {
+
+    const objetoRetornadoComItens = createMenu({food: {coxinha: 3.90, sanduiche: 9.90}, drink: {agua: 3.90, cerveja: 6.90}});
+    expect(objetoRetornadoComItens.fetchMenu()).toMatchObject({food: {coxinha: 3.90, sanduiche: 9.90}, drink: {agua: 3.90, cerveja: 6.90}});
+  });
+
+  it("Verifica se 'objetoRetornado.consumption', após a criação do menu, retorna um array vazio.", () => {
+
+    const objetoRetornado = createMenu({
+      food: {coxinha: 3.90, sanduiche: 9.90},
+      drinks: {agua: 3.90, cerveja: 6.90},
+    })
+    expect(objetoRetornado.consumption).toEqual([]);
+  });
+
+  it(`Verifica se, ao chamar uma função associada à chave 'order' no objeto retornado, passando uma string como parâmetro
+  - se a string existir nas chaves 'food' ou 'drink', deve ser adicionada ao array consumption
+  - senão, deve exibir a mensagem "Item indisponível" e não adicionar nada ao array`, () => {
     // 7: Verifique se, ao chamar uma função associada à chave `order` no objeto retornado, passando uma string como parâmetro
     // - se a string existir nas chaves 'food' ou 'drink', deve ser adicionada ao array consumption
     // - senão, deve exibir a mensagem "Item indisponível" e não adicionar nada ao array
     // Ex: obj.order('coxinha') --> ['coxinha']
     // Ex: obj.order('picanha') --> Exibe "Item indisponível"
+    const objetoRetornado = createMenu({
+      food: {coxinha: 3.90, sanduiche: 9.90},
+      drinks: {agua: 3.90, cerveja: 6.90},
+    })
+    objetoRetornado.order('coxinha');
 
-    // 8: Faça a implementação do item 8 do README no arquivo src/restaurant.js.
+    expect(objetoRetornado.consumption).toEqual(['coxinha']);
+    expect(objetoRetornado.order('dinheiro')).toBe('Item indisponível');
+  });
 
-    // 9: Verifique se, ao adicionar três pedidos em sequência, dentre bebidas e comidas, o array `objetoRetornado.consumption` contém os itens pedidos.
 
-    // 10: Verifique se a função `order` aceita que pedidos repetidos sejam acrescidos a `consumption`.
+  it('Verifica se, ao adicionar três pedidos em sequência, dentre bebidas e comidas, o array `objetoRetornado.consumption` contém os itens pedidos.', () => {
+    const objetoRetornado = createMenu({
+      food: {coxinha: 3.90, sanduiche: 9.90},
+      drinks: {agua: 3.90, cerveja: 6.90},
+    })
+    objetoRetornado.order('agua');
+    objetoRetornado.order('cerveja');
+    objetoRetornado.order('sanduiche');
+    expect(objetoRetornado.consumption).toEqual(['agua', 'cerveja', 'sanduiche']);
+  });
 
-    // 11: Verifique se, ao chamar `objetoRetornado.pay()`, retorna-se a soma dos preços de tudo que foi pedido, acrescido de 10%, conforme registrado em `objetoRetornado.consumption`.
+  it('Verifica se a função `order` aceita que pedidos repetidos sejam acrescidos a `consumption`.', () => {
+    
+    const objetoRetornado = createMenu({
+      food: {coxinha: 3.90, sanduiche: 9.90},
+      drinks: {agua: 3.90, cerveja: 6.90},
+    })
+    objetoRetornado.order('agua');
+    objetoRetornado.order('agua');
+    expect(objetoRetornado.consumption).toEqual(['agua', 'agua']);
+  });
 
-    // 12: Faça a implementação do item 12 do README no arquivo src/restaurant.js.
+  it('Verifica se, ao chamar `objetoRetornado.pay()`, retorna-se a soma dos preços de tudo que foi pedido, acrescido de 10%, conforme registrado em `objetoRetornado.consumption`.', () => {
+    const objetoRetornado = createMenu({
+      food: {coxinha: 3.90, sanduiche: 9.90},
+      drinks: {agua: 3.90, cerveja: 6.90},
+    })
+    objetoRetornado.order('agua');
+    objetoRetornado.order('agua');
 
+    expect(objetoRetornado.pay()).toEqual(8.58);
   });
 });
