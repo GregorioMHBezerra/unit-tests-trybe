@@ -18,9 +18,6 @@
   Comportamento:
   calculator(1, 2); // { sum: 3, mult: 2, div: 0, sub: -1 }
 
-
-
-
   Depois de ter implementado a função calculator, desenvolva uma função que converta objetos em arrays, de chaves, valores ou ambos.
   A sua função deve receber dois parâmetros:
 
